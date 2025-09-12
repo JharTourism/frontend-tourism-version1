@@ -1,0 +1,115 @@
+/* Background pattern */
+.bg-auth-pattern {
+  background-image: url('https://images.unsplash.com/photo-1620121692029-d088224ddc74?auto=format&fit=crop&q=80');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* Glass card styles */
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Form transitions */
+.auth-card {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 1;
+  transform: translateX(0);
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.auth-card.register {
+  max-width: 400px;
+  transform: translateX(100%);
+  opacity: 0;
+  animation: slideFromRight 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.auth-card.forgot {
+  transform: translateX(-100%);
+  opacity: 0;
+  animation: slideFromLeft 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes slideFromRight {
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideFromLeft {
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Input styles */
+.auth-input {
+  @apply w-full px-4 py-2 rounded-full border-0 bg-white/10 backdrop-blur-sm text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all duration-200;
+}
+
+.auth-input.error {
+  @apply focus:ring-red-500/30;
+}
+
+/* Select styles */
+select.auth-input {
+  @apply appearance-none bg-no-repeat bg-[length:16px_16px] bg-[right_1rem_center];
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+}
+
+select.auth-input option {
+  @apply bg-white text-black;
+}
+
+/* Button styles */
+.auth-button {
+  @apply w-full mt-6 px-4 py-2 rounded-full bg-white text-emerald-800 font-medium hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center;
+}
+
+.auth-button.success {
+  @apply bg-emerald-500 text-white hover:bg-emerald-600;
+  animation: successPulse 0.5s ease-in-out;
+}
+
+@keyframes successPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Custom font styles */
+.auth-title {
+  @apply text-2xl font-light text-white text-center mb-8;
+}
+
+.auth-text {
+  @apply text-sm text-white/90;
+}
+
+.auth-link {
+  @apply text-white hover:text-white/80 transition-colors duration-200;
+}
+
+/* Checkbox styles */
+.auth-checkbox {
+  @apply rounded border-white/30 bg-white/10 text-emerald-500 focus:ring-2 focus:ring-white/30 focus:ring-offset-0;
+}
+
+/* Error message styles */
+.error-message {
+  @apply text-red-300 text-sm mt-1;
+}
