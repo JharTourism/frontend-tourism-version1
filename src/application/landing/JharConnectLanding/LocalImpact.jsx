@@ -15,6 +15,7 @@ const LocalImpact = () => (
           <span className="text-gray-700">increase in local income (2025)</span>
         </div>
       </div>
+
       <div className="flex-1 flex flex-col items-center">
         <img
           src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80"
