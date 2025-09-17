@@ -84,14 +84,14 @@ const TouristDashboard = () => {
   ];
 
   const sidebarItems = [
-    { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, emoji: '🏠' },
-    { id: 'destinations', label: 'Destinations', icon: MapPin, emoji: '📍' },
-    { id: 'itinerary', label: 'Itinerary Planner', icon: CalendarDays, emoji: '🧳' },
-    { id: 'transport', label: 'Transport', icon: Car, emoji: '🚖' },
-    { id: 'accommodation', label: 'Accommodation', icon: Hotel, emoji: '🏨' },
-    { id: 'shopping', label: 'Shopping', icon: ShoppingCart, emoji: '🛍️' },
-    { id: 'map', label: 'Map', icon: MapIcon, emoji: '🗺️' },
-    { id: 'ai-chat', label: 'AI Chatbot', icon: Bot, emoji: '🤖' }
+    { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, emoji: '🏠', route: null },
+    { id: 'destinations', label: 'Destinations', icon: MapPin, emoji: '📍', route: 'destinations' },
+    { id: 'itinerary', label: 'Itinerary Planner', icon: CalendarDays, emoji: '🧳', route: 'itinerary' },
+    { id: 'transport', label: 'Transport', icon: Car, emoji: '🚖', route: 'transport' },
+    { id: 'accommodation', label: 'Accommodation', icon: Hotel, emoji: '🏨', route: 'accommodation' },
+    { id: 'shopping', label: 'Shopping', icon: ShoppingCart, emoji: '🛍️', route: 'shopping' },
+    { id: 'map', label: 'Map', icon: MapIcon, emoji: '🗺️', route: 'map' },
+    { id: 'ai-chat', label: 'AI Chatbot', icon: Bot, emoji: '🤖', route: null }
   ];
 
   const handleAITripPlanner = () => {
@@ -168,6 +168,8 @@ const TouristDashboard = () => {
                     handleAITripPlanner();
                   } else if (item.id === 'ai-chat') {
                     setShowChatbot(true);
+                  } else if (item.route) {
+                    navigate(`/tourist/${item.route}`);
                   }
                 }}
                 className={`w-full flex items-center gap-3 p-3 rounded-xl transition-all duration-200 ${
