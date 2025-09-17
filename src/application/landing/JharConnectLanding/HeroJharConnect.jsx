@@ -1,6 +1,13 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const HeroJharConnect = () => {
+  const navigate = useNavigate();
+
+  const handleStartJourney = () => {
+    navigate('/role-selection');
+  };
+
   return (
     <section className="relative h-[100vh] w-full flex items-center justify-center overflow-hidden bg-gradient-to-br from-green-100 to-blue-100">
       <img
@@ -17,12 +24,12 @@ const HeroJharConnect = () => {
         <p className="text-2xl md:text-3xl text-white/90 mb-8 font-medium">
           Your AI-Powered Gateway to Untouched Nature & Vibrant Culture.
         </p>
-        <a
-          href="#why-jharkhand"
-          className="inline-block px-10 py-4 bg-gradient-to-r from-green-600 to-yellow-500 text-white text-xl font-bold rounded-full shadow-lg hover:scale-105 transition-transform duration-200"
+        <button
+          onClick={handleStartJourney}
+          className="inline-block px-10 py-4 bg-gradient-to-r from-green-600 to-yellow-500 text-white text-xl font-bold rounded-full shadow-lg hover:scale-105 transition-transform duration-200 cursor-pointer"
         >
           Start Your Journey Now
-        </a>
+        </button>
       </div>
     </section>
   );

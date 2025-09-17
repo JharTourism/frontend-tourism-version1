@@ -125,7 +125,7 @@ const NavbarJharConnect = () => {
               </button>
 
               {/* Login Button with Gradient */}
-              <button onClick={() => navigate('/auth')} className="nav-login-btn">
+              <button onClick={() => navigate('/role-selection')} className="nav-login-btn">
                 Login
               </button>
             </div>
