@@ -196,6 +196,31 @@ const WhyJharkhand = () => {
     setVrOutput('');
     setVrError('');
     setSceneLoading(false);
+
+    // Check for WebXR support and Quest connection
+    if (navigator.xr) {
+      navigator.xr.isSessionSupported('immersive-vr').then((supported) => {
+        if (supported) {
+          setVrConnected(true);
+          setVrLoading(false);
+          setVrOutput('Oculus Quest/WebXR device detected! Launching VR scene...');
+          // Open Unity WebGL scene in new tab
+          setTimeout(() => {
+            window.open('/vr-scenes/v3/index.html', '_blank');
+            setShowVRModal(false);
+          }, 1200);
+        } else {
+          setVrError('No VR device found. Please connect your Oculus Quest or use a WebXR-compatible browser.');
+          setVrLoading(false);
+        }
+      }).catch(() => {
+        setVrError('WebXR not supported in this browser.');
+        setVrLoading(false);
+      });
+    } else {
+      setVrError('WebXR not supported in this browser.');
+      setVrLoading(false);
+    }
   };
 
   const handleVRQuit = () => {
