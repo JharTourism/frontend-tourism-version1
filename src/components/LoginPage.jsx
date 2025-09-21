@@ -32,8 +32,6 @@ const LoginPage = () => {
       navigate('/tourist-dashboard');
     } else if (role === 'guide') {
       navigate('/guide-dashboard');
-    } else if (role === 'admin') {
-      navigate('/admin-dashboard');
     } else {
       // For other roles, show success message for now
       alert(`Login successful for ${roleDisplay}! Dashboard coming soon.`);

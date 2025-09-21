@@ -1,98 +1,42 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
 import { 
   MapPin, 
   Car, 
   Home, 
   ShoppingBag, 
-  Map as MapIcon, 
+  Map, 
   MessageCircle, 
   ArrowRight,
   Star,
-  ChevronDown,
+  Clock,
+  Users,
+  Camera,
+  Heart,
+  Search,
+  Filter,
+  Bell,
+  User,
   Menu,
   X,
-  Search,
-  User,
-  Settings,
-  LogOut,
-  ChevronLeft,
   ChevronRight,
-  Plane,
-  Hotel,
-  ShoppingCart,
-  Bot,
-  LayoutDashboard,
-  CalendarDays,
-  Bell,
-  Sun,
-  Moon
+  Play,
+  Bookmark,
+  Share2,
+  Navigation,
+  Calendar,
+  TrendingUp,
+  Award,
+  Globe,
+  Zap
 } from 'lucide-react';
 
 const TouristDashboard = () => {
   const navigate = useNavigate();
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [showChatbot, setShowChatbot] = useState(false);
   const [chatMessage, setChatMessage] = useState('');
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const sliderRef = useRef(null);
-
-  // Sample destinations data
-  const destinations = [
-    { id: 1, name: 'Netarhat', rating: 4.7, image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=400&q=80', description: 'Queen of Chotanagpur Plateau' },
-    { id: 2, name: 'Patratu', rating: 4.5, image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=400&q=80', description: 'Scenic lake and dam' },
-    { id: 3, name: 'Betla National Park', rating: 4.8, image: 'https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?auto=format&fit=crop&w=400&q=80', description: 'Wildlife sanctuary adventure' },
-    { id: 4, name: 'Hundru Falls', rating: 4.6, image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=400&q=80', description: 'Majestic waterfall in the wild' },
-    { id: 5, name: 'Deoghar', rating: 4.4, image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=400&q=80', description: 'Sacred temple town' }
-  ];
-
-  const exploreCards = [
-    {
-      id: 'destinations',
-      title: 'Destinations',
-      icon: MapPin,
-      description: 'Discover Jharkhand\'s hidden gems',
-      gradient: 'from-green-500 to-emerald-600',
-      items: ['Netarhat', 'Patratu', 'Betla National Park', 'Hundru Falls', 'Deoghar']
-    },
-    {
-      id: 'transport',
-      title: 'Transport',
-      icon: Car,
-      description: 'Real-time travel information',
-      gradient: 'from-blue-500 to-cyan-600',
-      items: ['Bus Routes', 'Train Schedules', 'Local Transport', 'Car Rentals']
-    },
-    {
-      id: 'accommodation',
-      title: 'Homestays & Hotels',
-      icon: Home,
-      description: 'Authentic local stays',
-      gradient: 'from-purple-500 to-violet-600',
-      items: ['Heritage Hotels', 'Eco Resorts', 'Local Homestays', 'Budget Stays']
-    },
-    {
-      id: 'shopping',
-      title: 'Handicrafts & Local Market',
-      icon: ShoppingBag,
-      description: 'Traditional crafts and souvenirs',
-      gradient: 'from-orange-500 to-red-600',
-      items: ['Tribal Art', 'Traditional Textiles', 'Local Markets', 'Handicrafts']
-    }
-  ];
-
-  const sidebarItems = [
-    { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, emoji: '🏠', route: null },
-    { id: 'destinations', label: 'Destinations', icon: MapPin, emoji: '📍', route: 'destinations' },
-    { id: 'itinerary', label: 'Itinerary Planner', icon: CalendarDays, emoji: '🧳', route: 'itinerary' },
-    { id: 'transport', label: 'Transport', icon: Car, emoji: '🚖', route: 'transport' },
-    { id: 'accommodation', label: 'Accommodation', icon: Hotel, emoji: '🏨', route: 'accommodation' },
-    { id: 'shopping', label: 'Shopping', icon: ShoppingCart, emoji: '🛍️', route: 'shopping' },
-    { id: 'map', label: 'Map', icon: MapIcon, emoji: '🗺️', route: 'map' },
-    { id: 'ai-chat', label: 'AI Chatbot', icon: Bot, emoji: '🤖', route: null }
-  ];
+  const [activeTab, setActiveTab] = useState('explore');
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   const handleAITripPlanner = () => {
     navigate('/tourist/itinerary');
@@ -101,435 +45,444 @@ const TouristDashboard = () => {
   const handleChatbotSubmit = (e) => {
     e.preventDefault();
     if (chatMessage.trim()) {
-      // Add message to chat
+      alert(`AI Guide: "Thanks for your message: ${chatMessage}. Our AI assistant is coming soon!"`);
       setChatMessage('');
     }
   };
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % destinations.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + destinations.length) % destinations.length);
-  };
-
-  const handleLogout = () => {
-    if (window.confirm('Are you sure you want to logout?')) {
-      navigate('/role-selection');
+  const quickActions = [
+    {
+      id: 'ai-planner',
+      title: 'AI Trip Planner',
+      description: 'Get personalized recommendations',
+      icon: Zap,
+      gradient: 'from-purple-500 to-pink-500',
+      action: handleAITripPlanner
+    },
+    {
+      id: 'destinations',
+      title: 'Top Destinations',
+      description: 'Explore popular places',
+      icon: MapPin,
+      gradient: 'from-green-500 to-emerald-500',
+      action: () => navigate('/tourist/destinations')
+    },
+    {
+      id: 'accommodation',
+      title: 'Find Stays',
+      description: 'Hotels & homestays',
+      icon: Home,
+      gradient: 'from-blue-500 to-cyan-500',
+      action: () => navigate('/tourist/accommodation')
+    },
+    {
+      id: 'transport',
+      title: 'Transport',
+      description: 'Book your travel',
+      icon: Car,
+      gradient: 'from-orange-500 to-red-500',
+      action: () => navigate('/tourist/transport')
     }
-  };
+  ];
+
+  const featuredDestinations = [
+    {
+      name: 'Netarhat',
+      image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=600&q=80',
+      rating: 4.8,
+      reviews: 1240,
+      description: 'Queen of Chotanagpur Plateau',
+      price: '₹2,500',
+      duration: '2-3 days',
+      category: 'Hill Station',
+      isBookmarked: false
+    },
+    {
+      name: 'Hundru Falls',
+      image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=600&q=80',
+      rating: 4.6,
+      reviews: 890,
+      description: 'Majestic waterfall in the wild',
+      price: '₹1,200',
+      duration: '1 day',
+      category: 'Waterfall',
+      isBookmarked: true
+    },
+    {
+      name: 'Betla National Park',
+      image: 'https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?auto=format&fit=crop&w=600&q=80',
+      rating: 4.7,
+      reviews: 1560,
+      description: 'Wildlife sanctuary adventure',
+      price: '₹3,000',
+      duration: '3-4 days',
+      category: 'Wildlife',
+      isBookmarked: false
+    },
+    {
+      name: 'Deoghar',
+      image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=600&q=80',
+      rating: 4.5,
+      reviews: 2100,
+      description: 'Spiritual and cultural hub',
+      price: '₹1,800',
+      duration: '2 days',
+      category: 'Spiritual',
+      isBookmarked: true
+    }
+  ];
+
+  const stats = [
+    { label: 'Places Visited', value: '12', icon: MapPin, color: 'text-green-500' },
+    { label: 'Days in Jharkhand', value: '8', icon: Calendar, color: 'text-blue-500' },
+    { label: 'Photos Taken', value: '156', icon: Camera, color: 'text-purple-500' },
+    { label: 'Reviews Written', value: '5', icon: Star, color: 'text-yellow-500' }
+  ];
+
+  const recentActivities = [
+    { action: 'Booked accommodation at Netarhat', time: '2 hours ago', icon: Home },
+    { action: 'Added Hundru Falls to wishlist', time: '1 day ago', icon: Heart },
+    { action: 'Reviewed Betla National Park', time: '3 days ago', icon: Star },
+    { action: 'Shared photos from Deoghar', time: '1 week ago', icon: Share2 }
+  ];
 
   return (
-    <div className={`min-h-screen ${isDarkMode ? 'dark' : ''} bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50`}>
-      {/* Sidebar */}
-      <motion.div
-        initial={false}
-        animate={{ width: isSidebarOpen ? 280 : 80 }}
-        className={`fixed left-0 top-0 h-full bg-white/90 backdrop-blur-lg shadow-xl border-r border-gray-200 z-50 transition-all duration-300 ${
-          isDarkMode ? 'bg-gray-900/90 border-gray-700' : ''
-        }`}
-      >
-        <div className="flex flex-col h-full">
-          {/* Sidebar Header */}
-          <div className="p-6 border-b border-gray-200 flex items-center justify-between">
-            {isSidebarOpen && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="flex items-center gap-3"
-              >
-                <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-blue-500 rounded-xl flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">J</span>
-                </div>
-                <div>
-                  <h1 className="font-bold text-gray-800 text-lg">JharConnect</h1>
-                  <p className="text-sm text-gray-500">Tourist Portal</p>
-                </div>
-              </motion.div>
-            )}
-            <button
-              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-              className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
-            >
-              <Menu className="w-5 h-5 text-gray-600" />
-            </button>
-          </div>
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-40">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            {/* Logo */}
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-blue-500 rounded-xl flex items-center justify-center">
+                <MapPin className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <h1 className="text-xl font-bold text-gray-900">JharConnect</h1>
+                <p className="text-xs text-gray-500">Tourist Dashboard</p>
+              </div>
+            </div>
 
-          {/* Sidebar Navigation */}
-          <nav className="flex-1 p-4 space-y-2">
-            {sidebarItems.map((item) => (
-              <motion.button
-                key={item.id}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => {
-                  if (item.id === 'itinerary') {
-                    handleAITripPlanner();
-                  } else if (item.id === 'ai-chat') {
-                    setShowChatbot(true);
-                  } else if (item.route) {
-                    navigate(`/tourist/${item.route}`);
-                  }
-                }}
-                className={`w-full flex items-center gap-3 p-3 rounded-xl transition-all duration-200 ${
-                  item.id === 'dashboard' 
-                    ? 'bg-gradient-to-r from-green-500 to-blue-500 text-white shadow-lg' 
-                    : 'text-gray-600 hover:bg-gray-100 hover:text-gray-800'
-                } ${isDarkMode ? 'hover:bg-gray-800' : ''}`}
-              >
-                <span className="text-xl">{item.emoji}</span>
-                {isSidebarOpen && (
-                  <motion.span
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    className="font-medium"
-                  >
-                    {item.label}
-                  </motion.span>
-                )}
-              </motion.button>
-            ))}
-          </nav>
-
-          {/* Sidebar Footer */}
-          <div className="p-4 border-t border-gray-200">
-            <button
-              onClick={handleLogout}
-              className={`w-full flex items-center gap-3 p-3 rounded-xl text-gray-600 hover:bg-red-50 hover:text-red-600 transition-all duration-200 ${isDarkMode ? 'hover:bg-red-900/20' : ''}`}
-            >
-              <span className="text-xl">🚪</span>
-              {isSidebarOpen && (
-                <motion.span
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  className="font-medium"
-                >
-                  Logout
-                </motion.span>
-              )}
-            </button>
-          </div>
-        </div>
-      </motion.div>
-
-      {/* Main Content */}
-      <div className={`transition-all duration-300 ${isSidebarOpen ? 'ml-80' : 'ml-20'}`}>
-        {/* Top Navbar */}
-        <motion.header
-          initial={{ y: -20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          className="sticky top-0 z-40 bg-white/80 backdrop-blur-lg border-b border-gray-200 shadow-sm"
-        >
-          <div className="px-6 py-4 flex items-center justify-between">
-            <div className="flex items-center gap-4 flex-1">
-              <div className="relative max-w-md w-full">
+            {/* Search Bar */}
+            <div className="hidden md:flex flex-1 max-w-md mx-8">
+              <div className="relative w-full">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                 <input
                   type="text"
-                  placeholder="Search destinations, activities..."
-                  className="w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  placeholder="Search destinations, hotels, activities..."
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
                 />
               </div>
             </div>
 
-            <div className="flex items-center gap-4">
-              <button
-                onClick={() => setIsDarkMode(!isDarkMode)}
-                className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
-              >
-                {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-              </button>
-              <button className="p-2 rounded-lg hover:bg-gray-100 transition-colors relative">
-                <Bell className="w-5 h-5 text-gray-600" />
+            {/* Right Side */}
+            <div className="flex items-center space-x-4">
+              <button className="p-2 text-gray-400 hover:text-gray-600 relative">
+                <Bell className="w-6 h-6" />
                 <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>
               </button>
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center">
-                  <User className="w-4 h-4 text-white" />
+              <button className="p-2 text-gray-400 hover:text-gray-600">
+                <User className="w-6 h-6" />
+              </button>
+              <button
+                onClick={() => setShowMobileMenu(!showMobileMenu)}
+                className="md:hidden p-2 text-gray-400 hover:text-gray-600"
+              >
+                {showMobileMenu ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Welcome Section */}
+        <div className="mb-8">
+          <div className="bg-gradient-to-r from-green-500 to-blue-600 rounded-2xl p-8 text-white relative overflow-hidden">
+            <div className="absolute inset-0 bg-black/10"></div>
+            <div className="relative z-10">
+              <h2 className="text-3xl font-bold mb-2">Welcome back, Explorer! 👋</h2>
+              <p className="text-green-100 mb-6">Ready to discover more of Jharkhand's hidden treasures?</p>
+              <div className="flex flex-wrap gap-4 text-sm">
+                <div className="flex items-center space-x-2 bg-white/20 rounded-lg px-3 py-2">
+                  <MapPin className="w-4 h-4" />
+                  <span>Currently in Ranchi</span>
                 </div>
-                <div className="hidden md:block">
-                  <p className="text-sm font-medium text-gray-800">Tourist User</p>
-                  <p className="text-xs text-gray-500">Premium Member</p>
+                <div className="flex items-center space-x-2 bg-white/20 rounded-lg px-3 py-2">
+                  <Star className="w-4 h-4" />
+                  <span>4.8/5 Rating</span>
                 </div>
-                <ChevronDown className="w-4 h-4 text-gray-400" />
+                <div className="flex items-center space-x-2 bg-white/20 rounded-lg px-3 py-2">
+                  <TrendingUp className="w-4 h-4" />
+                  <span>12 places visited</span>
+                </div>
               </div>
             </div>
           </div>
-        </motion.header>
+        </div>
 
-        {/* Main Content Area */}
-        <main className="p-6 space-y-8">
-          {/* Welcome Hero Card */}
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            className="bg-gradient-to-r from-green-500 via-blue-500 to-purple-500 rounded-2xl p-8 text-white relative overflow-hidden"
-          >
-            <div className="absolute inset-0 bg-black/20"></div>
-            <div className="relative z-10">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h1 className="text-4xl font-bold mb-2">Welcome back! 👋</h1>
-                  <p className="text-xl opacity-90 mb-4">Ready to explore Jharkhand's amazing destinations?</p>
-                  <div className="flex items-center gap-4">
-                    <div className="flex items-center gap-2">
-                      <MapPin className="w-5 h-5" />
-                      <span>Currently in Ranchi</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Star className="w-5 h-5 text-yellow-300" />
-                      <span>Premium Tourist</span>
-                    </div>
+        {/* Stats Cards */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          {stats.map((stat, index) => {
+            const IconComponent = stat.icon;
+            return (
+              <div key={index} className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm text-gray-600 mb-1">{stat.label}</p>
+                    <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
                   </div>
-                </div>
-                <div className="hidden lg:block">
-                  <div className="w-32 h-32 bg-white/20 rounded-full flex items-center justify-center">
-                    <span className="text-6xl">🏔️</span>
-                  </div>
+                  <IconComponent className={`w-8 h-8 ${stat.color}`} />
                 </div>
               </div>
-            </div>
-          </motion.div>
+            );
+          })}
+        </div>
 
-          {/* AI Itinerary Planner Card */}
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.1 }}
-            className="bg-white/80 backdrop-blur-lg rounded-2xl p-8 shadow-lg border border-white/20"
-          >
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center">
-                  <Bot className="w-8 h-8 text-white" />
-                </div>
-                <div>
-                  <h2 className="text-2xl font-bold text-gray-800 mb-2">AI Itinerary Planner</h2>
-                  <p className="text-gray-600">Get personalized itineraries powered by artificial intelligence</p>
-                </div>
-              </div>
+        {/* Quick Actions */}
+        <div className="mb-8">
+          <h3 className="text-xl font-semibold text-gray-900 mb-4">Quick Actions</h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {quickActions.map((action) => {
+              const IconComponent = action.icon;
+              return (
+                <button
+                  key={action.id}
+                  onClick={action.action}
+                  className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-md transition-all duration-200 group text-left"
+                >
+                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${action.gradient} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200`}>
+                    <IconComponent className="w-6 h-6 text-white" />
+                  </div>
+                  <h4 className="font-semibold text-gray-900 mb-1">{action.title}</h4>
+                  <p className="text-sm text-gray-600">{action.description}</p>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Tab Navigation */}
+        <div className="mb-6">
+          <div className="flex space-x-1 bg-gray-100 p-1 rounded-xl w-fit">
+            {[
+              { id: 'explore', label: 'Explore' },
+              { id: 'bookings', label: 'My Bookings' },
+              { id: 'wishlist', label: 'Wishlist' },
+              { id: 'recent', label: 'Recent' }
+            ].map((tab) => (
               <button
-                onClick={handleAITripPlanner}
-                className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 flex items-center gap-2"
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                  activeTab === tab.id
+                    ? 'bg-white text-gray-900 shadow-sm'
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
               >
-                Plan My Trip with AI
-                <ArrowRight className="w-5 h-5" />
+                {tab.label}
               </button>
-            </div>
-          </motion.div>
+            ))}
+          </div>
+        </div>
 
-          {/* Featured Destinations Carousel */}
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="bg-white/80 backdrop-blur-lg rounded-2xl p-6 shadow-lg border border-white/20"
-          >
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-gray-800">Featured Destinations</h2>
-              <div className="flex gap-2">
-                <button
-                  onClick={prevSlide}
-                  className="p-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
-                >
-                  <ChevronLeft className="w-5 h-5" />
-                </button>
-                <button
-                  onClick={nextSlide}
-                  className="p-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
-                >
-                  <ChevronRight className="w-5 h-5" />
+        {/* Content based on active tab */}
+        {activeTab === 'explore' && (
+          <div className="space-y-8">
+            {/* Featured Destinations */}
+            <div>
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-xl font-semibold text-gray-900">Featured Destinations</h3>
+                <button className="text-green-600 hover:text-green-700 font-medium flex items-center space-x-1">
+                  <span>View all</span>
+                  <ChevronRight className="w-4 h-4" />
                 </button>
               </div>
-            </div>
-            <div className="relative overflow-hidden rounded-xl">
-              <div 
-                className="flex transition-transform duration-500 ease-in-out"
-                style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-              >
-                {destinations.map((destination) => (
-                  <div key={destination.id} className="w-full flex-shrink-0">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
-                      <div className="relative h-64 rounded-xl overflow-hidden">
-                        <img
-                          src={destination.image}
-                          alt={destination.name}
-                          className="w-full h-full object-cover"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                        <div className="absolute bottom-4 left-4 text-white">
-                          <h3 className="text-2xl font-bold">{destination.name}</h3>
-                          <div className="flex items-center gap-2">
-                            <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                            <span>{destination.rating}</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="p-6">
-                        <h3 className="text-2xl font-bold text-gray-800 mb-4">{destination.name}</h3>
-                        <p className="text-gray-600 mb-6">{destination.description}</p>
-                        <button className="bg-gradient-to-r from-green-500 to-blue-500 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300">
-                          Explore Now
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {featuredDestinations.map((destination, index) => (
+                  <div key={index} className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 group">
+                    <div className="relative">
+                      <img
+                        src={destination.image}
+                        alt={destination.name}
+                        className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                      <div className="absolute top-4 right-4 flex space-x-2">
+                        <button className="p-2 bg-white/90 backdrop-blur-sm rounded-full hover:bg-white transition-colors">
+                          <Bookmark className={`w-4 h-4 ${destination.isBookmarked ? 'text-red-500 fill-current' : 'text-gray-600'}`} />
+                        </button>
+                        <button className="p-2 bg-white/90 backdrop-blur-sm rounded-full hover:bg-white transition-colors">
+                          <Share2 className="w-4 h-4 text-gray-600" />
                         </button>
                       </div>
+                      <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg px-2 py-1 flex items-center space-x-1">
+                        <Star className="w-4 h-4 text-yellow-500 fill-current" />
+                        <span className="text-sm font-semibold">{destination.rating}</span>
+                        <span className="text-xs text-gray-600">({destination.reviews})</span>
+                      </div>
+                    </div>
+                    <div className="p-6">
+                      <div className="flex items-center justify-between mb-2">
+                        <h4 className="font-semibold text-gray-900">{destination.name}</h4>
+                        <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">{destination.category}</span>
+                      </div>
+                      <p className="text-sm text-gray-600 mb-4">{destination.description}</p>
+                      <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
+                        <div className="flex items-center space-x-1">
+                          <Clock className="w-4 h-4" />
+                          <span>{destination.duration}</span>
+                        </div>
+                        <div className="font-semibold text-gray-900">{destination.price}</div>
+                      </div>
+                      <button className="w-full bg-gradient-to-r from-green-500 to-blue-500 text-white py-2 rounded-xl font-medium hover:shadow-lg transition-all duration-200">
+                        Explore Now
+                      </button>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
-            <div className="flex justify-center gap-2 mt-6">
-              {destinations.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentSlide(index)}
-                  className={`w-3 h-3 rounded-full transition-all ${
-                    index === currentSlide ? 'bg-blue-500' : 'bg-gray-300'
-                  }`}
-                />
-              ))}
-            </div>
-          </motion.div>
 
-          {/* Explore Jharkhand Grid */}
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            className="bg-white/80 backdrop-blur-lg rounded-2xl p-6 shadow-lg border border-white/20"
-          >
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">Explore Jharkhand</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {exploreCards.map((card) => (
-                <motion.div
-                  key={card.id}
-                  whileHover={{ scale: 1.05, y: -5 }}
-                  className="bg-white/50 backdrop-blur-sm rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-all duration-300 cursor-pointer"
-                >
-                  <div className={`w-12 h-12 bg-gradient-to-r ${card.gradient} rounded-xl flex items-center justify-center mb-4`}>
-                    <card.icon className="w-6 h-6 text-white" />
-                  </div>
-                  <h3 className="font-bold text-gray-800 mb-2">{card.title}</h3>
-                  <p className="text-sm text-gray-600 mb-4">{card.description}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {card.items.slice(0, 3).map((item, index) => (
-                      <span key={index} className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-full">
-                        {item}
-                      </span>
-                    ))}
-                    {card.items.length > 3 && (
-                      <span className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-full">
-                        +{card.items.length - 3} more
-                      </span>
-                    )}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Interactive Map Card */}
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.4 }}
-            className="bg-white/80 backdrop-blur-lg rounded-2xl p-6 shadow-lg border border-white/20"
-          >
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-gray-800">Interactive Map</h2>
-              <span className="px-3 py-1 bg-orange-100 text-orange-600 text-sm font-medium rounded-full">
-                Coming Soon
-              </span>
-            </div>
-            <div className="h-64 bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl flex items-center justify-center">
-              <div className="text-center">
-                <MapIcon className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                <h3 className="text-xl font-semibold text-gray-600 mb-2">Interactive Map</h3>
-                <p className="text-gray-500">Real-time location tracking and route planning coming soon!</p>
+            {/* Interactive Map */}
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-xl font-semibold text-gray-900">Interactive Map</h3>
+                <button className="text-green-600 hover:text-green-700 font-medium flex items-center space-x-1">
+                  <Navigation className="w-4 h-4" />
+                  <span>Open in Maps</span>
+                </button>
+              </div>
+              <div className="bg-gray-100 rounded-xl h-64 flex items-center justify-center">
+                <div className="text-center text-gray-500">
+                  <Map className="w-16 h-16 mx-auto mb-4 opacity-50" />
+                  <p className="text-lg font-semibold">Interactive Map Coming Soon</p>
+                  <p className="text-sm">Explore Jharkhand with our interactive tourism map</p>
+                </div>
               </div>
             </div>
-          </motion.div>
-        </main>
+          </div>
+        )}
+
+        {activeTab === 'recent' && (
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
+            <h3 className="text-xl font-semibold text-gray-900 mb-6">Recent Activity</h3>
+            <div className="space-y-4">
+              {recentActivities.map((activity, index) => {
+                const IconComponent = activity.icon;
+                return (
+                  <div key={index} className="flex items-center space-x-4 p-4 bg-gray-50 rounded-xl">
+                    <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                      <IconComponent className="w-5 h-5 text-green-600" />
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-gray-900 font-medium">{activity.action}</p>
+                      <p className="text-sm text-gray-500">{activity.time}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
       </div>
 
-      {/* AI Chatbot Drawer */}
-      <AnimatePresence>
-        {showChatbot && (
-          <>
-            {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/50 z-50"
-              onClick={() => setShowChatbot(false)}
-            />
-            
-            {/* Drawer */}
-            <motion.div
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed right-0 top-0 h-full w-96 bg-white/95 backdrop-blur-lg shadow-2xl border-l border-gray-200 z-50"
-            >
-              <div className="flex flex-col h-full">
-                {/* Drawer Header */}
-                <div className="p-6 border-b border-gray-200 bg-gradient-to-r from-green-500 to-blue-500 text-white">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
-                        <Bot className="w-6 h-6" />
-                      </div>
-                      <div>
-                        <h3 className="font-bold text-lg">Jharkhand AI Guide</h3>
-                        <p className="text-sm opacity-90">Your travel companion</p>
-                      </div>
-                    </div>
-                    <button
-                      onClick={() => setShowChatbot(false)}
-                      className="p-2 rounded-lg hover:bg-white/20 transition-colors"
-                    >
-                      <X className="w-5 h-5" />
-                    </button>
+      {/* Floating Action Button */}
+      <button
+        onClick={() => setShowChatbot(true)}
+        className="fixed bottom-6 right-6 w-14 h-14 bg-gradient-to-r from-green-500 to-blue-500 text-white rounded-full shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300 flex items-center justify-center z-40"
+        title="Ask Jharkhand AI Guide"
+      >
+        <MessageCircle className="w-6 h-6" />
+      </button>
+
+      {/* Chatbot Modal */}
+      {showChatbot && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md">
+            <div className="p-6 border-b border-gray-200">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center">
+                    <MessageCircle className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900">Jharkhand AI Guide</h3>
+                    <p className="text-sm text-gray-500">Online now</p>
                   </div>
                 </div>
-
-                {/* Chat Messages */}
-                <div className="flex-1 p-6 overflow-y-auto space-y-4">
-                  <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center">
-                      <Bot className="w-4 h-4 text-white" />
-                    </div>
-                    <div className="bg-gray-100 rounded-xl p-3 max-w-xs">
-                      <p className="text-sm">Hello! I'm your AI travel guide. How can I help you plan your Jharkhand adventure?</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Chat Input */}
-                <div className="p-6 border-t border-gray-200">
-                  <form onSubmit={handleChatbotSubmit} className="flex gap-3">
-                    <input
-                      type="text"
-                      value={chatMessage}
-                      onChange={(e) => setChatMessage(e.target.value)}
-                      placeholder="Ask me anything about Jharkhand..."
-                      className="flex-1 px-4 py-3 bg-gray-100 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    />
-                    <button
-                      type="submit"
-                      className="px-6 py-3 bg-gradient-to-r from-green-500 to-blue-500 text-white rounded-xl hover:shadow-lg transition-all duration-300"
-                    >
-                      <ArrowRight className="w-5 h-5" />
-                    </button>
-                  </form>
-                </div>
+                <button
+                  onClick={() => setShowChatbot(false)}
+                  className="p-2 text-gray-400 hover:text-gray-600 rounded-full hover:bg-gray-100"
+                >
+                  <X className="w-5 h-5" />
+                </button>
               </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+            </div>
+            <div className="p-6">
+              <div className="bg-green-50 rounded-xl p-4 mb-4">
+                <p className="text-green-800">
+                  👋 Hi! I'm your AI guide for Jharkhand tourism. Ask me anything about destinations, travel tips, or local culture!
+                </p>
+              </div>
+              <form onSubmit={handleChatbotSubmit} className="flex gap-2">
+                <input
+                  type="text"
+                  value={chatMessage}
+                  onChange={(e) => setChatMessage(e.target.value)}
+                  placeholder="Ask about Jharkhand..."
+                  className="flex-1 px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                />
+                <button
+                  type="submit"
+                  className="bg-gradient-to-r from-green-500 to-blue-500 text-white px-4 py-3 rounded-xl hover:shadow-lg transition-all duration-200"
+                >
+                  Send
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Mobile Menu */}
+      {showMobileMenu && (
+        <div className="fixed inset-0 bg-black/50 z-50 md:hidden">
+          <div className="bg-white h-full w-80 shadow-xl">
+            <div className="p-6 border-b border-gray-200">
+              <div className="flex items-center justify-between">
+                <h3 className="text-lg font-semibold">Menu</h3>
+                <button
+                  onClick={() => setShowMobileMenu(false)}
+                  className="p-2 text-gray-400 hover:text-gray-600"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+            <div className="p-6 space-y-4">
+              <button className="w-full text-left p-3 rounded-xl hover:bg-gray-50 flex items-center space-x-3">
+                <User className="w-5 h-5 text-gray-600" />
+                <span>Profile</span>
+              </button>
+              <button className="w-full text-left p-3 rounded-xl hover:bg-gray-50 flex items-center space-x-3">
+                <Bookmark className="w-5 h-5 text-gray-600" />
+                <span>Wishlist</span>
+              </button>
+              <button className="w-full text-left p-3 rounded-xl hover:bg-gray-50 flex items-center space-x-3">
+                <Calendar className="w-5 h-5 text-gray-600" />
+                <span>Bookings</span>
+              </button>
+              <button
+                onClick={() => navigate('/role-selection')}
+                className="w-full text-left p-3 rounded-xl hover:bg-gray-50 flex items-center space-x-3"
+              >
+                <ArrowRight className="w-5 h-5 text-gray-600 rotate-180" />
+                <span>Back to Roles</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
