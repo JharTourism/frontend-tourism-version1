@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Youtube } from 'lucide-react';
 
 const highlights = [
@@ -30,7 +30,7 @@ const highlights = [
 ];
 
 
-const WhyJharkhand = () => {
+const SketchfabStyleCard = () => {
   const scrollRef = useRef(null);
   const [isHovering, setIsHovering] = useState(-1); // -1 means not hovering any card
   const [isDragging, setIsDragging] = useState(false);
