@@ -3,11 +3,24 @@ import React from 'react';
 const HeroJharConnect = () => {
   return (
     <section className="relative h-[100vh] w-full flex items-center justify-center overflow-hidden bg-gradient-to-br from-green-100 to-blue-100">
-      <img
-        src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1500&q=80"
-        alt="Jharkhand Nature & Culture"
-        className="absolute inset-0 w-full h-full object-cover object-center opacity-80 z-0"
-      />
+      {/* Video Background */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover object-center z-0"
+      >
+        <source src="https://res.cloudinary.com/dfkfysygf/video/upload/v1758445217/Jhar-Connect_-_Made_with_Clipchamp_online-video-cutter-upscaled_ruaf7x.mp4" type="video/mp4" />
+        {/* Fallback image for browsers that don't support video */}
+        <img
+          src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1500&q=80"
+          alt="Jharkhand Nature & Culture"
+          className="absolute inset-0 w-full h-full object-cover object-center"
+        />
+      </video>
+      {/* Light black filter overlay */}
+      <div className="absolute inset-0 bg-black/40 z-10" />
       {/* Subtle animated overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-green-900/60 via-transparent to-blue-900/40 z-10 animate-pulse" />
       <div className="relative z-20 text-center max-w-3xl mx-auto px-4">
