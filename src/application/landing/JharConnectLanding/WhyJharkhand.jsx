@@ -208,49 +208,125 @@ const WhyJharkhand = () => {
   };
 
   return (
-    <section id="why-jharkhand" className="py-20 bg-gradient-to-br from-emerald-50 to-yellow-50">
+    <section id="why-jharkhand" className="py-16 bg-gradient-to-br from-slate-50 via-emerald-50 to-blue-50 relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-green-400 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-400 rounded-full blur-3xl"></div>
+      </div>
+      
       <style>{`
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        .wj-card-hover {
-          filter: brightness(0.7);
-          transition: filter 0.3s;
+        
+        .modern-card {
+          background: rgba(255, 255, 255, 0.8);
+          backdrop-filter: blur(20px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .wj-bubble {
+        
+        .modern-card:hover {
+          transform: translateY(-8px) scale(1.02);
+          background: rgba(255, 255, 255, 0.95);
+          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+          border-color: rgba(34, 197, 94, 0.3);
+        }
+        
+        .modern-card:hover .card-image {
+          transform: scale(1.05);
+        }
+        
+        .modern-card:hover .card-title {
+          color: #059669;
+        }
+        
+        .action-buttons {
           position: absolute;
           top: 50%;
           left: 50%;
           transform: translate(-50%, -50%);
           display: flex;
-          gap: 1.5rem;
+          gap: 1rem;
+          opacity: 0;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .wj-bubble-icon {
-          background: rgba(255,255,255,0.7);
-          border-radius: 9999px;
-          padding: 0.7rem;
-          box-shadow: 0 2px 12px 0 rgba(0,0,0,0.10);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transition: background 0.2s;
+        
+        .modern-card:hover .action-buttons {
+          opacity: 1;
+          transform: translate(-50%, -50%) scale(1);
         }
-        .wj-bubble-icon:hover {
-          background: rgba(255,255,255,0.95);
+        
+        .action-btn {
+          background: rgba(255, 255, 255, 0.9);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          border-radius: 50%;
+          padding: 0.75rem;
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          cursor: pointer;
+        }
+        
+        .action-btn:hover {
+          transform: scale(1.1);
+          background: rgba(255, 255, 255, 1);
+          box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+        }
+        
+        .vr-btn:hover {
+          border-color: rgba(34, 197, 94, 0.5);
+          box-shadow: 0 12px 35px rgba(34, 197, 94, 0.3);
+        }
+        
+        .video-btn:hover {
+          border-color: rgba(239, 68, 68, 0.5);
+          box-shadow: 0 12px 35px rgba(239, 68, 68, 0.3);
+        }
+        
+        .card-image {
+          transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-title {
+          transition: color 0.3s ease;
+        }
+        
+        .modern-btn {
+          background: rgba(255, 255, 255, 0.8);
+          backdrop-filter: blur(10px);
+          border: 2px solid rgba(34, 197, 94, 0.3);
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .modern-btn:hover {
+          background: rgba(34, 197, 94, 0.1);
+          border-color: rgba(34, 197, 94, 0.6);
+          transform: translateY(-2px);
+          box-shadow: 0 10px 30px rgba(34, 197, 94, 0.2);
         }
       `}</style>
-      <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-4xl font-bold text-center text-green-900 mb-4">
-          Experience the Untamed Beauty, Embrace the Rich Heritage
-        </h2>
-        <p className="text-center text-gray-600 mb-10 text-lg max-w-2xl mx-auto">
-          Discover Jharkhand's wonders through vivid stories and authentic moments. Scroll to explore the state's natural beauty and vibrant culture.
-        </p>
+      <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Modern Header */}
+        <div className="text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4 tracking-wide">
+            Experience the Untamed Beauty
+          </h2>
+          <h3 className="text-2xl md:text-3xl font-semibold text-gray-700 mb-6 tracking-wide">
+            Embrace the Rich Heritage
+          </h3>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed font-medium">
+            Discover Jharkhand's wonders through vivid stories and authentic moments. 
+            <span className="block mt-2 text-base">Scroll to explore the state's natural beauty and vibrant culture.</span>
+          </p>
+        </div>
         <div
           ref={scrollRef}
-          className="flex gap-8 overflow-x-auto hide-scrollbar pb-4"
+          className="flex gap-8 overflow-x-auto hide-scrollbar pb-8"
           style={{
             cursor: isDragging ? 'grabbing' : 'grab',
-            height: '500px',
+            height: '520px',
             alignItems: 'center',
             userSelect: 'none',
             WebkitUserSelect: 'none',
@@ -259,35 +335,55 @@ const WhyJharkhand = () => {
           {loopedHighlights.map((item, idx) => (
             <div
               key={idx}
-              className={`relative rounded-3xl shadow-lg overflow-hidden flex flex-col min-w-[320px] max-w-xs h-[380px] transition-transform duration-200 ${isHovering === idx ? 'wj-card-hover scale-105' : 'bg-white'}`}
+              className="modern-card relative rounded-3xl overflow-hidden flex flex-col min-w-[340px] max-w-sm h-[420px]"
               onMouseEnter={() => setIsHovering(idx)}
               onMouseLeave={() => setIsHovering(-1)}
-              style={{ transition: 'filter 0.3s, transform 0.2s' }}
             >
-              <img src={item.image} alt={item.title} className="h-48 w-full object-cover" style={{borderTopLeftRadius: '1.5rem', borderTopRightRadius: '1.5rem'}} />
-              <div className="p-6 flex-1 flex flex-col">
-                <h3 className="text-xl font-bold text-green-800 mb-2">{item.title}</h3>
-                <p className="text-gray-700 text-base flex-1">{item.description}</p>
-              </div>
-              {isHovering === idx && (
-                <div className="wj-bubble">
-                  <span className="wj-bubble-icon" onClick={handleVRClick} style={{cursor:'pointer'}}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-rectangle-goggles-icon text-green-700 opacity-80"><path d="M20 6a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-4a2 2 0 0 1-1.6-.8l-1.6-2.13a1 1 0 0 0-1.6 0L9.6 17.2A2 2 0 0 1 8 18H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z"/></svg>
-                  </span>
-                  <span className="wj-bubble-icon"><Youtube className="w-7 h-7 text-red-600 opacity-80" /></span>
+              {/* Image Container */}
+              <div className="relative h-56 overflow-hidden">
+                <img 
+                  src={item.image} 
+                  alt={item.title} 
+                  className="card-image h-full w-full object-cover" 
+                  style={{borderTopLeftRadius: '1.5rem', borderTopRightRadius: '1.5rem'}} 
+                />
+                
+                {/* Action Buttons Overlay */}
+                <div className="action-buttons">
+                  <button 
+                    className="action-btn vr-btn" 
+                    onClick={handleVRClick}
+                    title="Experience in VR"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-green-600">
+                      <path d="M20 6a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-4a2 2 0 0 1-1.6-.8l-1.6-2.13a1 1 0 0 0-1.6 0L9.6 17.2A2 2 0 0 1 8 18H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z"/>
+                    </svg>
+                  </button>
+                  <button 
+                    className="action-btn video-btn"
+                    title="Watch Video"
+                  >
+                    <Youtube className="w-6 h-6 text-red-600" />
+                  </button>
                 </div>
-              )}
+              </div>
+              
+              {/* Content */}
+              <div className="p-8 flex-1 flex flex-col">
+                <h3 className="card-title text-2xl font-semibold text-gray-800 mb-3 leading-tight">
+                  {item.title}
+                </h3>
+                <p className="text-gray-600 text-base flex-1 leading-relaxed">
+                  {item.description}
+                </p>
+              </div>
             </div>
           ))}
         </div>
-        {/* See more plans button */}
-        <div className="flex justify-center mt-8">
-          <button
-            className="px-8 py-3 rounded-full border-2 border-green-700 text-green-800 font-bold text-lg bg-white transition-all duration-300 relative overflow-hidden group"
-            style={{ minWidth: '200px' }}
-          >
-            <span className="relative z-10 group-hover:text-white transition-colors duration-300">See more plans</span>
-            <span className="absolute inset-0 z-0 group-hover:bg-gradient-to-r group-hover:from-green-500 group-hover:to-yellow-400 group-hover:opacity-100 opacity-0 transition-all duration-300 rounded-full" />
+        {/* Modern CTA Button */}
+        <div className="flex justify-center mt-16">
+          <button className="modern-btn px-12 py-4 rounded-full text-green-700 font-semibold text-lg">
+            Explore More Destinations
           </button>
         </div>
         {/* VR Modal */}

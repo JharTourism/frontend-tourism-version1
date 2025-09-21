@@ -19,20 +19,24 @@ const HeroJharConnect = () => {
           className="absolute inset-0 w-full h-full object-cover object-center"
         />
       </video>
-      {/* Light black filter overlay */}
-      <div className="absolute inset-0 bg-black/40 z-10" />
+      {/* Black filter overlay */}
+      <div className="absolute inset-0 bg-black/60 z-10" />
       {/* Subtle animated overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-green-900/60 via-transparent to-blue-900/40 z-10 animate-pulse" />
-      <div className="relative z-20 text-center max-w-3xl mx-auto px-4">
-        <h1 className="text-5xl md:text-7xl font-extrabold text-white drop-shadow-lg mb-6">
-          Jhar-Connect: Discover the Soul of Jharkhand
+      <div className="absolute inset-0 z-10 animate-pulse" />
+      <div className="relative z-20 text-center max-w-4xl mx-auto px-4">
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 tracking-wide leading-tight">
+          <span className="block font-bold text-2xl md:text-3xl lg:text-4xl mb-6 tracking-wider bg-gradient-to-r from-green-400 to-yellow-400 bg-clip-text text-transparent relative uppercase font-extrabold">
+            JHAR-CONNECT
+            <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-green-400 to-yellow-400 rounded-full opacity-80"></span>
+          </span>
+          Discover the Soul of Jharkhand
         </h1>
-        <p className="text-2xl md:text-3xl text-white/90 mb-8 font-medium">
-          Your AI-Powered Gateway to Untouched Nature & Vibrant Culture.
+        <p className="text-lg md:text-xl lg:text-2xl text-white/90 mb-10 font-semibold leading-relaxed max-w-2xl mx-auto">
+          Your AI-Powered Gateway to Untouched Nature & Vibrant Culture
         </p>
         <a
           href="#why-jharkhand"
-          className="inline-block px-10 py-4 bg-gradient-to-r from-green-600 to-yellow-500 text-white text-xl font-bold rounded-full shadow-lg hover:scale-105 transition-transform duration-200"
+          className="inline-block px-8 py-4 bg-white/10 backdrop-blur-md border border-green-400/50 text-white text-lg font-semibold rounded-full shadow-xl hover:bg-white/20 hover:shadow-2xl transition-all duration-300 hover:scale-105"
         >
           Start Your Journey Now
         </a>

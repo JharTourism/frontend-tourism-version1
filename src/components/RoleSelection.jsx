@@ -37,25 +37,84 @@ const RoleSelection = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-purple-50 relative overflow-hidden">
-      {/* Blurred Background */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute inset-0 bg-gradient-to-br from-green-100/30 via-blue-100/30 to-purple-100/30"></div>
-        <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, rgba(0,0,0,0.1) 1px, transparent 0)`,
-          backgroundSize: '20px 20px'
-        }}></div>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-emerald-50 to-blue-50 relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-20 left-10 w-80 h-80 bg-emerald-400 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-10 w-72 h-72 bg-blue-400 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-green-400 rounded-full blur-3xl"></div>
       </div>
+      
+      <style>{`
+        .role-card {
+          background: rgba(255, 255, 255, 0.8);
+          backdrop-filter: blur(20px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .role-card:hover {
+          transform: translateY(-8px) scale(1.02);
+          background: rgba(255, 255, 255, 0.95);
+          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+          border-color: rgba(34, 197, 94, 0.3);
+        }
+        
+        .role-icon-container {
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .role-card:hover .role-icon-container {
+          transform: scale(1.1) rotate(5deg);
+        }
+        
+        .role-title {
+          transition: color 0.3s ease;
+        }
+        
+        .role-card:hover .role-title {
+          color: #059669;
+        }
+        
+        .role-btn {
+          background: rgba(255, 255, 255, 0.9);
+          backdrop-filter: blur(10px);
+          border: 2px solid rgba(34, 197, 94, 0.3);
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .role-btn:hover {
+          background: rgba(34, 197, 94, 0.1);
+          border-color: rgba(34, 197, 94, 0.6);
+          transform: translateY(-2px);
+          box-shadow: 0 10px 30px rgba(34, 197, 94, 0.2);
+        }
+        
+        .back-btn {
+          background: rgba(255, 255, 255, 0.8);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .back-btn:hover {
+          background: rgba(255, 255, 255, 0.95);
+          border-color: rgba(34, 197, 94, 0.3);
+          transform: translateY(-2px);
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+      `}</style>
       
       {/* Content */}
       <div className="relative z-10 flex items-center justify-center min-h-screen px-4 py-12">
         <div className="w-full max-w-6xl">
-          {/* Header */}
+          {/* Modern Header */}
           <div className="text-center mb-16">
-            <h1 className="text-5xl font-bold text-gray-800 mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4 tracking-wide">
               Choose Your Role
             </h1>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed font-medium">
               Select how you'd like to experience Jharkhand's tourism platform
             </p>
           </div>
@@ -70,38 +129,32 @@ const RoleSelection = () => {
                   className="group cursor-pointer"
                   onClick={() => handleRoleSelect(role.id)}
                 >
-                  <div className="relative bg-white/80 backdrop-blur-lg rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-white/20">
-                    {/* Gradient Overlay on Hover */}
-                    <div className={`absolute inset-0 bg-gradient-to-br ${role.gradient} opacity-0 group-hover:opacity-10 rounded-2xl transition-opacity duration-300`}></div>
-                    
-                    {/* Content */}
-                    <div className="relative z-10 text-center">
-                      {/* Icon */}
-                      <div className={`w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br ${role.gradient} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                        <IconComponent className="w-10 h-10 text-white" />
-                      </div>
-                      
-                      {/* Title */}
-                      <h3 className="text-2xl font-bold text-gray-800 mb-3">
-                        {role.title}
-                      </h3>
-                      
-                      {/* Description */}
-                      <p className="text-gray-600 mb-6 leading-relaxed">
-                        {role.description}
-                      </p>
-                      
-                      {/* Login Button */}
-                      <button
-                        className={`w-full py-3 px-6 bg-gradient-to-r ${role.gradient} text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 group-hover:bg-gradient-to-r group-hover:${role.hoverGradient}`}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleRoleSelect(role.id);
-                        }}
-                      >
-                        Login as {role.title}
-                      </button>
+                  <div className="role-card rounded-3xl p-8 text-center">
+                    {/* Icon */}
+                    <div className={`role-icon-container w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br ${role.gradient} flex items-center justify-center shadow-lg`}>
+                      <IconComponent className="w-10 h-10 text-white" />
                     </div>
+                    
+                    {/* Title */}
+                    <h3 className="role-title text-2xl font-bold text-gray-800 mb-3 leading-tight">
+                      {role.title}
+                    </h3>
+                    
+                    {/* Description */}
+                    <p className="text-gray-600 mb-6 leading-relaxed text-base">
+                      {role.description}
+                    </p>
+                    
+                    {/* Login Button */}
+                    <button
+                      className="role-btn w-full py-3 px-6 text-green-700 font-semibold rounded-full text-lg hover:scale-105 transition-transform"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleRoleSelect(role.id);
+                      }}
+                    >
+                      Login as {role.title}
+                    </button>
                   </div>
                 </div>
               );
@@ -109,10 +162,10 @@ const RoleSelection = () => {
           </div>
 
           {/* Back to Home */}
-          <div className="text-center mt-12">
+          <div className="text-center mt-16">
             <button
               onClick={() => navigate('/')}
-              className="text-gray-600 hover:text-gray-800 font-medium transition-colors duration-200 flex items-center justify-center mx-auto gap-2"
+              className="back-btn text-gray-700 font-semibold px-6 py-3 rounded-full flex items-center justify-center mx-auto gap-2 hover:text-green-700 transition-colors"
             >
               ← Back to Home
             </button>
